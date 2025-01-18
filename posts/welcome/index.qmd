@@ -1,0 +1,65 @@
+---
+title: 'Exploring Data Science: Predicting Academic Success and Dropout Risk'
+author: Jingyuan Wang
+date: '2025-01-15'
+categories:
+  - news
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.1
+  kernelspec:
+    display_name: Python (dsci513)
+    language: python
+    name: dsci513
+---
+
+Data science has become a widely discussed topic in the media, attracting an increasing number of students to explore it as a field of study. However, how data science and its models are applied in the real world often remains a question to the students. To shed light on this, I present a recent case study completed by my team, offering insights into the practical applications of data science.
+
+In general, we begin by identifying the problem we aim to solve. Next, we preprocess the data to ensure it is suitable for model building. We then select an appropriate data science model to train on the data, followed by evaluating the model's performance to determine whether it meets our requirements or needs further adjustments. Finally, we address the limitations of the model and explore potential future improvements. In this blog, we will delve into the details of each step.
+
+# Introduction: identify the problem
+
+Each year, universities face the challenge of students dropping out before completing their studies, which has a negative impact on both the students’ futures and the university’s reputation. If we could predict which students are at risk of dropping out, we could provide supportive strategies in advance. In this project, we use the knowledge of data science. Our team built a predictive model to help universities reduce dropout rates based on the student enrollment data. The data is source from UC Irvine’s Machine Learning Repository. 
+
+# The data processing 
+
+The dataset comprises over 3,000 student records and 36 features. These features represent variables that could influence the final outcome. For instance, if students with lower scores are more likely to drop out, then their scores become a key feature to investigate. In this case, the features encompass academic performance, demographic details, and socio-economic indicators.
+
+Before building the models, we began by exploring the data to understand the relationships between variables and outcomes. This process, known as Exploratory Data Analysis (EDA), involves summarizing the dataset and creating plots to visualize the connections between variables and the target outcome. Through EDA, we could identify features that are irrelevant or biased, which we removed to improve the model's performance. Additionally, some numerical features existed on different scales, which could cause significant issues during model training. To address this, we standardized these features to ensure they are measured on a consistent scale.
+
+# The approach: k-Nearest Neighbors (k-NN) 
+
+After processing the data, we moved on to the phase of buildig model. For this task, we chose the k-Nearest Neighbors (k-NN) algorithm. While there are several models available, k-NN stands out as one of the simplest and most intuitive methods for classification problems. This algorithm works by finding a group of students with similar characteristics to predict a student’s outcome. The more similar these students are, the more likely they are to exhibit the same behaviors. For example, students who perform poorly in exams may be more likely to drop out, whereas those with strong academic performance are more likely to continue their studies.
+
+To further illustrate how k-NN works, consider the example shown below, which I borrowed from the UBC DSCI571 lecture notes. In this example, we are predicting the location of a test point based on its three nearest neighbors. The test point will be assigned to the class that the majority of its neighboring points belong to. Since two of the three nearest neighbors are labeled as Canada, we would classify the test point as Canada.
+![Figure 1: Illustration of k-NN](knn.png)
+
+# Evaluate the model performance
+
+After building the models, we evaluated their performance to determine whether any further adjustments were necessary. We used the test accuracy(test score) to measure it. Finally, our model achieved 72% test accuracy, meaning it made correct predictions 72% of the time when tested on new, unseen data. It is relatively a good score in the data science, indicating that our model generalizes well to new data. 
+
+Additionally, our model also correctly identified 68% of students at risk of dropping out, as shown in the confusion matrix below. This matrix illustrated there were 277 students who actually dropped out and our model correctly identified 188 of them.
+![Figure 2: Confusion matrix](confusion_matrix.png)
+
+# Future improvements
+
+There are still several areas for improvement and limitations in our model. First, our data source comes from a single institution, which limits its generalizability to other universities. To develop a more robust and comprehensive model, we would need a broader dataset that includes student records from multiple institutions.. 
+
+Additionally, while our test accuracy stands at 72%, there is room for improvement by exploring more sophisticated models that could enhance predictive performance. As mentioned earlier, k-NN is a simple and intuitive model for classification problems. However, data science offers a variety of more advanced models, such as random forests and neural networks, which may deliver better results. That said, delving into these complex models is beyond the scope of this blog.
+
+# Conclusion
+
+The model in this project offers valuable insights into students who may be at risk of dropping out. However, this alone is insufficient. To develop more tailored and effective strategies for supporting at-risk students, the model should also incorporate additional social and economic factors. Furthermore, while the model provides an overall picture of students at risk, it is crucial to account for each student's unique circumstances on an individual basis when applying its insights.
+
+I hope this blog has provided you with a general understanding of how a typical data science project is conducted using a real-world dataset, how data scientists' work can help address real-world problems, and the limitations that come with it.
+
+# Reference
+
+[1] UBC DSCI571 lecture notes: https://pages.github.ubc.ca/mds-2024-25/DSCI_571_sup-learn-1_students/lectures/notes/03_kNNs-SVM-RBF.html
+
+[2] UC Irvine’s Machine Learning Repository: https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
+
